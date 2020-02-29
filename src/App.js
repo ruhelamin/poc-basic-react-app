@@ -1,21 +1,37 @@
 import React from 'react';
+import { Container, Row, Col, ListGroup, Badge } from 'react-bootstrap';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Container>
+        <Row>
+          <Col>
+            <h1>Books</h1>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+
+            <ListGroup>
+
+              <ListGroup.Item variant="primary" className="mt-3">
+                <h4>Ο Αλέξανδρος ο Μακεδών</h4>
+                <p>Author: Ανώνυμος</p>
+                <p><Badge pill variant="light">ID: 2086</Badge> <Badge pill variant="light">Published on: 1529</Badge> <Badge pill variant="light">Published in: Βενετία, Ιταλία</Badge> <Badge pill variant="light">Pages: 104</Badge></p>
+              </ListGroup.Item>
+
+              <ListGroup.Item variant="primary" className="mt-3">
+                <h4>Ο Αλέξανδρος ο Μακεδών</h4>
+                <p>Author: Ανώνυμος</p>
+                <p><Badge pill variant="light">ID: 2086</Badge> <Badge pill variant="light">Published on: 1529</Badge> <Badge pill variant="light">Published in: Βενετία, Ιταλία</Badge> <Badge pill variant="light">Pages: 104</Badge></p>
+              </ListGroup.Item>
+
+            </ListGroup>
+
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 }
