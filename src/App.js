@@ -1,7 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Container, Row, Col, ListGroup, Badge } from 'react-bootstrap';
 
-function App() {
+const App = () => {
+
+  const [items, setItems] = useState([]);
+  const [isLoading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+
+  useEffect(() => {
+    const fetchItems = async () => {
+      setLoading(true);
+      const response = await axios.post('http://nyx.vima.ekt.gr:3000/api/books');
+      console.log("response", response);
+      setItems(response.data);
+      setLoading(false);
+    }
+
+    fetchItems();
+  }, []);
+
+  console.log("items", items);
+
   return (
     <div className="App">
       <Container>
