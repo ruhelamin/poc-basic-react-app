@@ -5,17 +5,36 @@ const ItemsPagination = ({ itemsPerPage, totalItems, paginate, currentPage }) =>
 
   let active = currentPage;
   let pageNumbers = [];
-  for (let pageNumber = 1; pageNumber <= Math.ceil(totalItems / itemsPerPage); pageNumber++) {
+  let totalPages = Math.ceil(totalItems / itemsPerPage);
+  let adjustPagination = (currentPage > 5  || currentPage < totalPages - 5) && totalPages > 10;
+
+  let startPage = adjustPagination ? currentPage - 5 : 1;
+  let endPage = adjustPagination ? currentPage + 5 : 10;
+  let prevPage = currentPage > 1 ? currentPage - 1 : 1;
+
+  let nextPage = totalPages < currentPage ? currentPage + 1 : totalPages;
+  
+  pageNumbers.push(
+    <Pagination.Prev key='prev' disabled={currentPage === 1 } onClick={() => paginate(prevPage)} />
+  );
+
+  for (let pageNumber = startPage; pageNumber <= endPage; pageNumber++) {
     pageNumbers.push(
       <Pagination.Item key={pageNumber} active={pageNumber === active} onClick={() => paginate(pageNumber)}>
         {pageNumber}
-      </Pagination.Item>,
+      </Pagination.Item>
     );
   }
+  
+  pageNumbers.push(
+    <Pagination.Next key='next' disabled={currentPage === totalPages } onClick={() => paginate(nextPage)} />
+  );
 
   return (
 
-    <Pagination size="sm" className="mt-3">{pageNumbers}</Pagination>
+    <Pagination size="lg" className="mt-3">
+      {pageNumbers}
+    </Pagination>
 
     // TODO: bootstrap pagination component for large number of pages
     // <Pagination>

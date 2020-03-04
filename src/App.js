@@ -6,16 +6,20 @@ import { Container, Row, Col } from 'react-bootstrap';
 
 const App = () => {
 
+  let urlSearchParams = new URLSearchParams(window.location.search);
+  console.log("urlSearchParams", urlSearchParams);
+
+  let currentPageInURL = urlSearchParams.get('page') ? urlSearchParams.get('page') : urlSearchParams.set('page', 1);
+  console.log("currentPageInURL", currentPageInURL);
+
   const [items, setItems] = useState([]);
   const [itemsCount, setItemsCount] = useState();
   const [isLoading, setLoading] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(!isNaN(currentPageInURL) ? currentPageInURL : 1);
   const [itemsPerPage] = useState(20);
 
-  let urlSearchParams = new URLSearchParams(window.location.search);
-
   const pageNumberQueryParam = (pageNumber) => {
-    urlSearchParams.set("page", pageNumber);
+    urlSearchParams.set('page', pageNumber);
     let newRelativePathQuery = `${window.location.pathname}?${urlSearchParams.toString()}`;
     window.history.pushState(null, '', newRelativePathQuery);
   };
@@ -53,8 +57,8 @@ const App = () => {
         </Row>
         <Row>
           <Col>
-            <Items items={items} isLoading={isLoading} />
             <ItemsPagination itemsPerPage={itemsPerPage} totalItems={itemsCount} currentPage={currentPage} paginate={paginate} />
+            <Items items={items} isLoading={isLoading} />
           </Col>
         </Row>
       </Container>
