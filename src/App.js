@@ -7,10 +7,8 @@ import { Container, Row, Col } from 'react-bootstrap';
 const App = () => {
 
   let urlSearchParams = new URLSearchParams(window.location.search);
-  console.log("urlSearchParams", urlSearchParams);
-
   let currentPageInURL = urlSearchParams.get('page') ? urlSearchParams.get('page') : urlSearchParams.set('page', 1);
-  console.log("currentPageInURL", currentPageInURL);
+  // console.log("currentPageInURL", currentPageInURL);
 
   const [items, setItems] = useState([]);
   const [itemsCount, setItemsCount] = useState();
@@ -55,7 +53,7 @@ const App = () => {
             <h1 className="mt-3">Books</h1>
           </Col>
         </Row>
-        <Row>
+        <Row className="mb-5">
           <Col>
             <ItemsPagination itemsPerPage={itemsPerPage} totalItems={itemsCount} currentPage={currentPage} paginate={paginate} />
             <Items items={items} isLoading={isLoading} />
